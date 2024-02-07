@@ -1,0 +1,27 @@
+
+
+
+FROM dc_py:latest
+
+WORKDIR /app
+
+COPY ./ $WORKDIR
+
+
+ENV DCtoken="MTIwwxxxxxxxxxxxxxxxxxxxxxxxxxx"
+# 機器人的token可以在 https://discord.com/developers/applications/應用程式id/bot中找到
+ENV DCwebhook="https://discord.com/api/webhooks/1200782469830561892/zDexxxxxxxxxxxxxxxxxxxxxx"
+ENV logchannel="123456789123456789123456789"
+
+
+
+ENV adminid="123456789123456789"
+# ENV adminid="kagariet01"  這是錯誤的設定
+ENV data_path="./data.json"
+#  data_path是資料庫的位置，預設是在根目錄下的data.json，可以自行更改
+#  除非有特殊需求，否則不建議更改
+
+RUN echo "{}" > ${data_path}
+
+CMD python3 main.py
+
