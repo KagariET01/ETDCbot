@@ -164,6 +164,65 @@ way 2. 下載.zip包，到[這裡][rp]>Code>Download ZIP下載壓縮包
 1. 在你和機器人的私訊中，輸入`/recovery dta=<剛剛的json資料>`來回復設定
 1. 在同樣的地方輸入`/reload`，讓機器人重新載入資料
 
+
+
+# 目前支援的指令
+
+- `two_fan.py` 二番賞
+	- `/2fan_r`  `lst  (清單)`  建立新的二番賞
+		- p.s. 每個server只能有一個二番賞
+		- 越左邊的獎項越高級
+		- 獎項分為1等獎到n等獎
+			- ~~為何不是A到Z呢，因為這是二番賞~~
+		- 清單格式範例如下
+			- 不同元素之間以逗點  `,`  分隔
+				```txt
+				1,2,3,4,5
+				```
+				代表有一個一等獎、兩個二等獎...五個五等獎
+	- `/2fan_see` 查看還沒被抽走的號碼
+	- `/2fan_get`  `id  (int)` 抽獎
+		- 老闆會告訴你該編號的籤是什麼獎
+
+- `which.py` 哪個
+	- `哪個 ` `清單`
+		- 隨機回傳清單裡的東西
+		- 清單以空格分隔
+		- 標準格式範例如下
+			```txt
+			哪個 小ㄌㄌ 大美女 小正太 大帥哥
+			```
+
+- `help.py` help
+	- `/help`
+		- 就是字面上的意思
+
+- `tf.py`  是不是、要不要、有沒有
+	- ...`是不是`...
+	- ...`要不要`...
+	- ...`有沒有`...
+	- 隨機回復  `是` 、 `不是` ......
+
+- `random.py` 隨機取數
+	- `/random`  `l (int) = 1`  `r (int) = 100`  
+		- 在l~r之間隨機取一亂數
+
+- `pet.py` 迷你寵物
+	- 提及該機器人，機器人可能會有一些反應
+	- 這邊有一些例子
+		- @ bot 早安
+		- @ bot 午安
+		- @ bot 晚安
+		- @ bot 宵夜安
+		- @ bot 零晟安
+		- @ bot 清晟安
+		- @ bot 起床安
+		- @ bot XXXX（自己猜）
+
+
+
+
+
 # LICENSE 版權許可
 
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/KagariET01/ETDCbot">ETDCbot</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://kagariet01.github.io/about">KagariET01</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
