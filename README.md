@@ -166,7 +166,7 @@ way 2. 下載.zip包，到[這裡][rp]>Code>Download ZIP下載壓縮包
 
 
 
-# 目前支援的指令
+# 目前支援的功能
 
 - `two_fan.py` 二番賞
 	- `/2fan_r`  `lst  (清單)`  建立新的二番賞
