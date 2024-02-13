@@ -38,15 +38,14 @@ async def on_ready():#  DCbot啟動
 	# DBG("[main]bot已啟動，身分為："+str(DCbot.user))
 	
 	DBG(f"[main]載入 {len(slash)} 個斜線指令")
-	str=""
-	for i in slash:
-		str+=f"/{i.name}\n"
-		DBG(i.name)
+	# str=""
+	# for i in slash:
+	# 	str+=f"/{i.name}\n"
+	# 	DBG(i.name)
 	await DCbot.change_presence(status=discord.Status.online,activity=discord.Game("更新：即停系統"))
 	threading.Thread(target=dta_ctrl.save,args=()).start()
 	# await DCbot.get_channel(logchannel).send("雞雞人已啟動，身分為："+str(DCbot.user))
 	
-
 	#await DCbot.get_channel(logchannel).send(message.author.name+"說：```\n"+message.content+"```")
 
 

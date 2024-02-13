@@ -10,19 +10,19 @@ hook=os.getenv("DCwebhook")
 def send_DC(txt,bef="",aft=""):#  將訊息傳送到DC
 	print(bef+str(txt)+aft)
 	# hook=os.getenv("DCwebhook")
-	data={
-		"content":("```txt\n"+txt+"\n```"),
-		"username":"小ㄌㄌ",
-		"avatar_url":"https://avatars.githubusercontent.com/u/66681962",
-		"attachments":[]
-	}
-	if(hook==None or hook==""):
-		print("未設定DCwebhook")
-		return
-	if(hook==""):
-		print("未設定DCwebhook")
-		return
-	r=requests.post(hook,json.dumps(data),headers={'Content-Type':'application/json'})
+	# data={
+	# 	"content":("```txt\n"+txt+"\n```"),
+	# 	"username":"小ㄌㄌ",
+	# 	"avatar_url":"https://avatars.githubusercontent.com/u/66681962",
+	# 	"attachments":[]
+	# }
+	# if(hook==None or hook==""):
+	# 	print("未設定DCwebhook")
+	# 	return
+	# if(hook==""):
+	# 	print("未設定DCwebhook")
+	# 	return
+	# r=requests.post(hook,json.dumps(data),headers={'Content-Type':'application/json'})
 
 def get_msn(message:discord.Message):#  監聽訊息
 	# hook=os.getenv("DCwebhook")

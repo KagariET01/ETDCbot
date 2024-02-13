@@ -1,8 +1,8 @@
 - [X] [亂數](./cogs/random.py)
-- [ ] 硬幣
+- [X] [硬幣](./cogs/coin.py)
 - [ ] 拉霸
-- [ ] 擲茭
-- [ ] 骰子
+- [X] [擲茭](./cogs/poe_divination.py)
+- [X] [骰子](./cogs/dice.py)
 - [ ] 抽籤
 - [X] [是不是、要不要、有沒有](./cogs/tf.py)
 - [X] [哪個](./cogs/which.py)

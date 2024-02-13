@@ -8,7 +8,7 @@ g_path=os.getenv("data_path")
 data={}
 
 def save():
-	json.dump(data,open(g_path,"w+",encoding="utf-8"),ensure_ascii=False,indent=2,sort_keys=True,allow_nan=True)
+	json.dump(data,open(g_path,"w+",encoding="utf-8"),ensure_ascii=False,sort_keys=True,allow_nan=True)
 	print(f"\033[k[autosave]在{str(datetime.datetime.now())}已儲存")
 
 
