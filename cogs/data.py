@@ -11,6 +11,7 @@ import json
 import function.data as dta_ctrl
 import os
 import requests
+from cogs.sudo import sudo_check as su
 
 
 class data_ctrl(commands.Cog):
@@ -34,7 +35,7 @@ class data_ctrl(commands.Cog):
 	async def on_message(self,message:discord.Message):
 		if(message.author==self.bot.user):
 			return
-		if(message.author.id!=int(os.getenv("adminid"))):
+		if(not su(message.author.id)):
 			return
 		if("recovery" in message.content):
 			await message.channel.send("回復中")
@@ -57,7 +58,7 @@ class data_ctrl(commands.Cog):
 	@app_commands.command(name="recovery",description="回復資料")
 	@app_commands.describe(dta="json格式的資料檔案")
 	async def recovery(self,interaction:discord.Interaction,dta:str):
-		if(interaction.user.id!=int(os.getenv("adminid"))):
+		if(not su(interaction.user.id)):
 			await interaction.response.send_message("你不是bot擁有者，拒絕存取")
 			return
 		await interaction.response.send_message("請直接在聊天室輸入`recovery`，並附上檔案以回復資料")
@@ -65,7 +66,7 @@ class data_ctrl(commands.Cog):
 	@app_commands.command(name="export",description="匯出資料")
 	@app_commands.describe(self_channel="是否用私訊")
 	async def export(self,interaction:discord.Interaction,self_channel:bool=True):
-		if(interaction.user.id!=int(os.getenv("adminid"))):
+		if(not su(interaction.user.id)):
 			await interaction.response.send_message("你不是bot擁有者，拒絕存取")
 			return
 		print("匯出中")
@@ -77,7 +78,7 @@ class data_ctrl(commands.Cog):
 	
 	@app_commands.command(name="reload",description="重新載入")
 	async def reload(self,interaction:discord.Interaction):
-		if(interaction.user.id!=int(os.getenv("adminid"))):
+		if(not su(interaction.user.id)):
 			await interaction.response.send_message("你不是bot擁有者，拒絕存取")
 			return
 		dta_ctrl.load()

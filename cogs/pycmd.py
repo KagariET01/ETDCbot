@@ -8,6 +8,7 @@ from discord import app_commands#  增加DC / 指令支援
 from function.webhook_DBG import send_DC as DBG
 import function.colors as C
 import os
+from cogs.sudo import sudo_check as su
 
 class pycmd(commands.Cog):
 	bot:commands.Bot
@@ -28,7 +29,7 @@ class pycmd(commands.Cog):
 	@app_commands.command(name="cmd",description="Py Command")
 	@app_commands.describe(c="command")
 	async def cmd(self,interaction:discord.Interaction,c:str):
-		if(interaction.user.id!=int(os.getenv("adminid"))):
+		if(not su(interaction.user.id)):
 			await interaction.response.send_message("你不是bot擁有者，拒絕存取")
 			return
 		try:

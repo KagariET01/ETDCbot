@@ -105,6 +105,7 @@ way 2. 下載.zip包，到[這裡][rp]>Code>Download ZIP下載壓縮包
 	export logchannel=<你的Debug頻道ID>
 	export adminid=<你的Discord ID>
 	export data_path="./data.json"
+	export timezone=0
 	```
 	- 修改完後，他應該會長這樣  
 		```bash
@@ -113,6 +114,7 @@ way 2. 下載.zip包，到[這裡][rp]>Code>Download ZIP下載壓縮包
 		export logchannel=123456789123456789123456789
 		export adminid=123456789123456789
 		export data_path="./data.json"
+		export timezone=0
 		```
 	- 重啟機器人可能需要重打這些指令，可以另存個.sh檔
 1. 我們要建立空的資料庫，執行下列指令
@@ -139,12 +141,14 @@ way 2. 下載.zip包，到[這裡][rp]>Code>Download ZIP下載壓縮包
 
 ## Docker
 
-1. 將[Dockerfile][Dockerfile]複製出來，它裡面有你的機器人設定
+1. 將[Dockerfile][Dockerfile]複製出來，它裡面有你的機器人設定，可以讓你參考
 1. 使用以下指令，下載最新的原始碼
 	```bash
 	git pull
 	```
-1. 將[Dockerfile][Dockerfile]覆蓋過去
+1. 修改[Dockerfile][Dockerfile]的設定，你可以參考你剛剛複製的檔案  
+	- p.s. 不同版本的機器人可能會有不同的設定
+	
 1. 載次執行`build.sh`，此指令會自動部屬虛擬機，並執行機器人
 
 ## 使用指令

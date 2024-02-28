@@ -8,6 +8,7 @@ from function.webhook_DBG import get_msn,get_user
 from colorama import Fore, Style, Back
 import function.colors as C
 import os
+from cogs.sudo import sudo_check as su
 
 
 logchannel=os.getenv("logchannel")

@@ -9,19 +9,18 @@ from discord import app_commands#  增加DC / 指令支援
 from function.webhook_DBG import send_DC as DBG
 import function.colors as C
 import os
+from cogs.sudo import sudo_check as su
 
-coin=[
+coin_list=[
 	"擲出金幣：正面","擲出金幣：反面",
 	"擲出銀幣：正面","擲出銀幣：反面",
 	"擲出銅幣：正面","擲出銅幣：反面",
-	"丟出一張小朋友：正面","丟出一張小朋友：反面"
 ]
 
 coin_special=[
 	"擲出金幣：正面","擲出金幣：反面","擲出金幣：小ㄌㄌ把它撿走了",
 	"擲出銀幣：正面","擲出銀幣：反面","擲出銀幣：小ㄌㄌ把它撿走了",
 	"擲出銅幣：正面","擲出銅幣：反面","擲出銅幣：小ㄌㄌ把它撿走了",
-	"丟出一張小朋友：正面","丟出一張小朋友：反面","丟出一張小朋友：小ㄌㄌ把它撿走了"
 ]
 
 
@@ -40,13 +39,29 @@ class coin(commands.Cog):
 	
 	@commands.Cog.listener()
 	async def on_message(self,message:discord.Message):
+		global coin_list,coin_special
 		if(message.author==self.bot.user):
 			return
-		if(message.author.id==os.getenv("adminid")):
-			await message.channel.send(f"{random.shuffle(coin_special)[0]}")
+		if(su(message.author.id) and "擲硬幣" in message.content):
+			re=random.choice(coin_special)
+			DBG(re)
+			await message.channel.send(f"{re}")
 		if("擲硬幣" in message.content):
-			await message.channel.send(f"{random.shuffle(coin)[0]}")
+			re:str=random.choice(coin_list)
+			DBG(re)
+			await message.channel.send(f"{re}")
 
+	@app_commands.command(name="coin",description="擲硬幣")
+	async def coin(self,interaction:discord.Interaction):
+		global coin_list,coin_special
+		if(su(interaction.user.id)):
+			re=random.choice(coin_special)
+			DBG(re)
+			await interaction.response.send_message(f"{re}")
+		else:
+			re=random.choice(coin_list)
+			DBG(re)
+			await interaction.response.send_message(f"{re}")
 	
 	
 

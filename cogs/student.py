@@ -9,6 +9,7 @@ from discord import app_commands#  增加DC / 指令支援
 from function.webhook_DBG import send_DC as DBG
 import function.colors as C
 import function.data as dta_ctrl
+import function.get_key as gk
 
 class student(commands.Cog):
 	bot:commands.Bot
@@ -27,56 +28,42 @@ class student(commands.Cog):
 	async def reset(self,interaction:discord.Interaction,l:int=1,r:int=30):
 		if(l>r):
 			l,r=r,l
-		gid:str=interaction.guild.id
-		cid:str=interaction.channel.id
-		if(gid not in dta_ctrl.data):
-			dta_ctrl.data[gid]={}
-		if(cid not in dta_ctrl.data[gid]):
-			dta_ctrl.data[gid][cid]={}
-		if("student" not in dta_ctrl.data[gid][cid]):
-			dta_ctrl.data[gid][cid]["student"]={}
-		dta_ctrl.data[gid][cid]["student"]["get"]=[i for i in range(l,r+1)]
+		
+		k:str=gk.key(interaction)
+		if(k not in dta_ctrl.data):
+			dta_ctrl.data[k]={}
+		if("student" not in dta_ctrl.data[k]):
+			dta_ctrl.data[k]["student"]={}
+		dta_ctrl.data[k]["student"]["get"]=[i for i in range(l,r+1)]
 		await interaction.response.send_message(f"座號抽籤重製完成，範圍為{l}~{r}")
 
 	@app_commands.command(name="student_get",description="抽籤")
 	async def get(self,interaction:discord.Interaction):
-		gid:str=interaction.guild.id
-		cid:str=interaction.channel.id
-		if(gid not in dta_ctrl.data):
+		k:str=gk.key(interaction)
+		if(k not in dta_ctrl.data):
 			await interaction.response.send_message("請先使用student_r重製")
-			return
-		if(cid not in dta_ctrl.data[gid]):
+		if("student" not in dta_ctrl.data[k]):
 			await interaction.response.send_message("請先使用student_r重製")
-			return
-		if("student" not in dta_ctrl.data[gid][cid]):
-			await interaction.response.send_message("請先使用student_r重製")
-			return
-		if(len(dta_ctrl.data[gid][cid]["student"]["get"])==0):
+		if(len(dta_ctrl.data[k]["student"]["get"])==0):
 			await interaction.response.send_message("座號全部抽完了，請使用student_r重製")
 			return
-		get=random.choice(dta_ctrl.data[gid][cid]["student"]["get"])
-		dta_ctrl.data[gid][cid]["student"]["get"].remove(get)
+		get=random.choice(dta_ctrl.data[k]["student"]["get"])
+		dta_ctrl.data[k]["student"]["get"].remove(get)
 		await interaction.response.send_message(f"抽到{get}")
 		
 	@app_commands.command(name="student_see",description="查看誰還沒被抽到過")
 	async def see(self,interaction:discord.Interaction):
-		gid:str=interaction.guild.id
-		cid:str=interaction.channel.id
-		if(gid not in dta_ctrl.data):
+		k:str=gk.key(interaction)
+		if(k not in dta_ctrl.data):
 			await interaction.response.send_message("請先使用student_r重製")
-			return
-		if(cid not in dta_ctrl.data[gid]):
+		if("student" not in dta_ctrl.data[k]):
 			await interaction.response.send_message("請先使用student_r重製")
-			return
-		if("student" not in dta_ctrl.data[gid][cid]):
-			await interaction.response.send_message("請先使用student_r重製")
-			return
-		if(len(dta_ctrl.data[gid][cid]["student"]["get"])==0):
-			await interaction.response.send_message("座號全部抽完了")
+		if(len(dta_ctrl.data[k]["student"]["get"])==0):
+			await interaction.response.send_message("座號全部抽完了，請使用student_r重製")
 			return
 		restr="剩下這些座號沒被抽到\n"
 		c=10
-		for i in dta_ctrl.data[gid][cid]["student"]["get"]:
+		for i in dta_ctrl.data[k]["student"]["get"]:
 			restr+=f"{i}號 "
 			c-=1
 			if(c==0):

@@ -12,6 +12,7 @@ import function.data as dta_ctrl
 import os
 import datetime
 import time
+from cogs.sudo import sudo_check as su
 
 class tools(commands.Cog):
 	bot:commands.Bot
@@ -29,7 +30,7 @@ class tools(commands.Cog):
 	@app_commands.command(name="tool_clear",description="清空聊天欄")
 	@app_commands.describe(channel_name="頻道名",check_code="確認碼",focus="機器人管理員強制執行")
 	async def clear(self,interaction:discord.Interaction,channel_name:str,check_code:int=0,focus:bool=False):
-		if(not(interaction.user.id==int(os.getenv("adminid")) and focus) and not interaction.permissions.administrator and not interaction.permissions.manage_messages):
+		if(not(su(interaction.user.id) and focus) and not interaction.permissions.administrator and not interaction.permissions.manage_messages):
 			await interaction.response.send_message("你沒有權限，拒絕存取")
 			return
 		if(channel_name!=interaction.channel.name):
@@ -56,7 +57,7 @@ class tools(commands.Cog):
 	@app_commands.command(name="tool_cancel",description="清空聊天欄")
 	@app_commands.describe(focus="機器人管理員強制執行")
 	async def cancel(self,interaction:discord.Interaction,focus:bool=False):
-		if(not(interaction.user.id==int(os.getenv("adminid")) and focus) and not interaction.permissions.administrator and not interaction.permissions.manage_messages):
+		if(not(su(interaction.user.id) and focus) and not interaction.permissions.administrator and not interaction.permissions.manage_messages):
 			await interaction.response.send_message("你沒有權限，拒絕存取")
 			return
 		self.code[interaction.channel_id]=0

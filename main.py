@@ -42,7 +42,7 @@ async def on_ready():#  DCbot啟動
 	# for i in slash:
 	# 	str+=f"/{i.name}\n"
 	# 	DBG(i.name)
-	await DCbot.change_presence(status=discord.Status.online,activity=discord.Game("更新：即停系統"))
+	await DCbot.change_presence(status=discord.Status.online,activity=discord.Game("Dev通道"))
 	threading.Thread(target=dta_ctrl.save,args=()).start()
 	# await DCbot.get_channel(logchannel).send("雞雞人已啟動，身分為："+str(DCbot.user))
 	

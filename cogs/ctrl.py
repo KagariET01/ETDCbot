@@ -10,6 +10,7 @@ from function.webhook_DBG import send_DC as DBG
 import function.colors as C
 import os
 import datetime
+from cogs.sudo import sudo_check as su
 
 class ctrl(commands.Cog):
 	bot:commands.Bot
@@ -34,7 +35,7 @@ class ctrl(commands.Cog):
 	@app_commands.command(name="ctrl_stop",description="緊急停止")
 	@app_commands.describe(code="輸入確認碼")
 	async def ctrl_stop(self,interaction:discord.Interaction,code:int=0):
-		if(interaction.user.id!=int(os.getenv("adminid"))):
+		if(not su(interaction.user.id)):
 			await interaction.response.send_message("你不是bot擁有者，拒絕存取")
 			return
 		if(self.time==None or datetime.datetime.now()-self.time>datetime.timedelta(minutes=1)):

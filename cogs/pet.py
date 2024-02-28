@@ -7,6 +7,7 @@ from function.webhook_DBG import send_DC as DBG
 from function.webhook_DBG import get_msn,get_user
 import function.colors as C
 import os
+from cogs.sudo import sudo_check as su
 
 class pet(commands.Cog):
 	bot:commands.Bot
@@ -21,14 +22,12 @@ class pet(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_message(self,message:discord.Message):
-		if(
-			("<@"+str(self.bot.user.id)+">")in(message.content)
-			):
+		if(self.bot.user in message.mentions):
 			if("我喜歡你"in(message.content)):
-				if(message.author.id==self.adminid):
+				if(su(message.author.id)):
 					await message.reply("我也喜歡你歐，"+message.author.mention)
 				else:
-					await message.reply("我是"+self.bot.fetch_user(self.adminid).mention+"的女朋友，你不要把我搶走，"+message.author.mention)
+					pass
 			if("安"in(message.content)):
 				await message.reply("早安，"+message.author.mention)
 			

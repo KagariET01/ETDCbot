@@ -38,8 +38,27 @@ dta=[
 			"問就是沒有"
 		]
 	},
+	{
+		"key":"對不對",
+		"re":[
+			"對",
+			"不對",
+			"問就是對",
+			"問就是錯",
+			"全對",
+			"全錯",
+			"大錯特錯",
+			"大對特對（？",
+			"錯得離譜",
+			"對得離譜",
+		]
+	},
 ]
 
+ma=[
+	"肯定",
+	"否定"
+]
 
 class tf(commands.Cog):
 	bot:commands.Bot
@@ -62,7 +81,8 @@ class tf(commands.Cog):
 			if(i["key"]in(message.content)):
 				await message.reply(random.choice(i["re"]))
 				return
-		
+		if("嗎？"in message.content):
+			await message.reply(random.choice(ma))
 
 async def setup(bot:commands.Bot):
 	#  將Cog加入Bot中

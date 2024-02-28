@@ -12,6 +12,7 @@ import time
 import function.data as dta_ctrl
 import copy
 from function.get_key import key
+from cogs.sudo import sudo_check as su
 
 
 
@@ -129,7 +130,7 @@ class main(commands.Cog):
 			if(cnt==10):
 				restr+="\n"
 				cnt=0
-		if(interaction.permissions.administrator or interaction.user.id==os.getenv("adminid")):
+		if(interaction.permissions.administrator or su(interaction.user.id)):
 			await interaction.user.send(f"```\n{restr}\n```")
 			se=await interaction.response.send_message("已私訊給你，請查收")
 		else:
